@@ -326,7 +326,7 @@ Contributions welcome! Please:
 
 ## 📝 License
 
-MIT License - see LICENSE file for details
+Copyrighted by KindCue. 
 
 ---
 
@@ -345,7 +345,7 @@ Built with:
 
 - **Documentation**: http://localhost:8000/docs (when running)
 - **Issues**: Create an issue on GitHub
-- **Email**: support@nestworth.example
+- **Email**: kindcue@gmail.com
 
 ---
 
