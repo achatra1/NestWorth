@@ -1,0 +1,59 @@
+{
+  "version": "v1.0",
+  "description": "Cost assumptions for home-based childcare (in-home nanny or family care)",
+  "one_time_items": [
+    {"item": "Stroller", "cost": 500},
+    {"item": "Crib", "cost": 500},
+    {"item": "Car Seat", "cost": 500},
+    {"item": "High Chair", "cost": 200}
+  ],
+  "one_time_total": 1700,
+  "recurring_items": [
+    {"item": "Diapers", "cost": 80},
+    {"item": "Wipes", "cost": 15},
+    {"item": "Baby Food/Formula", "cost": 150},
+    {"item": "Supplies", "cost": 25},
+    {"item": "Toys/Misc", "cost": 20}
+  ],
+  "recurring_monthly_total": 290,
+  "childcare_cost_by_band": {
+    "Low": 600,
+    "Medium": 800,
+    "High": 1600
+  },
+  "childcare_cost_factors_by_year": {
+    "1": 1.0,
+    "2": 0.9,
+    "3": 0.8,
+    "4": 0.7,
+    "5": 0.6
+  },
+  "recurring_cost_factor_by_year": {
+    "1": 1.0,
+    "2": 1.0,
+    "3": 1.0,
+    "4": 1.2,
+    "5": 1.2
+  },
+  "medical_one_time_cost": 0,
+  "zip_cost_band": {
+    "01748": "High",
+    "94107": "High",
+    "10001": "High",
+    "90210": "High",
+    "60601": "High",
+    "02101": "High",
+    "98101": "High",
+    "30301": "Medium",
+    "75201": "Medium",
+    "33101": "Medium",
+    "85001": "Medium",
+    "80201": "Medium",
+    "19101": "Medium",
+    "36052": "Low",
+    "50001": "Low",
+    "68001": "Low",
+    "73001": "Low",
+    "87001": "Low"
+  }
+}

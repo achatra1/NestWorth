@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+        @page {
+            size: A4;
+            margin: 2cm;
+        }
+        body {
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            color: #2D3748;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 2em;
+            padding-bottom: 1em;
+            border-bottom: 3px solid #4A5568;
+        }
+        h1 {
+            color: #2A4365;
+            font-size: 2.5em;
+            margin: 0.5em 0;
+        }
+        .tagline {
+            color: #718096;
+            font-size: 1.1em;
+            font-style: italic;
+        }
+        h2 {
+            color: #2C5282;
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+            font-size: 1.5em;
+            border-bottom: 2px solid #E2E8F0;
+            padding-bottom: 0.3em;
+        }
+        ul {
+            margin: 0.5em 0 1.5em 1.5em;
+            padding-left: 1em;
+        }
+        li {
+            margin: 0.5em 0;
+        }
+        .intro {
+            background-color: #EDF2F7;
+            padding: 1.5em;
+            border-radius: 8px;
+            margin-bottom: 2em;
+            border-left: 4px solid #4299E1;
+        }
+        .budget-split {
+            background-color: #F7FAFC;
+            padding: 1.5em;
+            border-radius: 8px;
+            margin: 1em 0;
+        }
+        .budget-split h3 {
+            color: #2D3748;
+            margin-top: 0;
+        }
+        .budget-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5em 0;
+            border-bottom: 1px dotted #CBD5E0;
+        }
+        .disclaimer {
+            font-size: 0.9em;
+            color: #718096;
+            background-color: #FFF5F5;
+            padding: 1.5em;
+            border-radius: 8px;
+            margin-top: 2em;
+            border-left: 4px solid #FC8181;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 3em;
+            padding-top: 1em;
+            border-top: 2px solid #E2E8F0;
+            color: #A0AEC0;
+            font-size: 0.9em;
+        }
+        .warning {
+            color: #C53030;
+        }
+        .success {
+            color: #38A169;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🏡 NestWorth Baby Budget Blueprint</h1>
+        <p class="tagline">Your personalized 5-year financial plan for growing your family</p>
+    </div>
+
+    <div class="intro">
+        <p><strong>Welcome to your Baby Budget Blueprint!</strong></p>
+        <p>This 5-year baby budget plan is based on your input and general cost assumptions. It is <strong>not</strong> financial advice, but a personalized forecast to help you prepare for your growing family. Use this as a guide and adjust for your circumstances.</p>
+    </div>
+
+    <div class="budget-split">
+        <h3>💰 Budget Split Summary</h3>
+        <div class="budget-item">
+            <span>Housing:</span>
+            <span><strong>{{ blueprint.budget_split.housing_percent }}%</strong></span>
+        </div>
+        <div class="budget-item">
+            <span>Childcare:</span>
+            <span><strong>{{ blueprint.budget_split.childcare_percent }}%</strong></span>
+        </div>
+        <div class="budget-item">
+            <span>Baby Needs (diapers, formula, etc.):</span>
+            <span><strong>{{ blueprint.budget_split.baby_needs_percent }}%</strong></span>
+        </div>
+        <div class="budget-item">
+            <span>Remaining for other expenses:</span>
+            <span><strong>{{ blueprint.budget_split.remaining_percent }}%</strong></span>
+        </div>
+        <div class="budget-item" style="border-top: 2px solid #2D3748; margin-top: 1em; padding-top: 1em;">
+            <span><strong>Average Monthly Baby Cost:</strong></span>
+            <span><strong>${{ "%.0f"|format(blueprint.budget_split.monthly_baby_cost) }}</strong></span>
+        </div>
+        <div class="budget-item">
+            <span><strong>Total 5-Year Baby Cost:</strong></span>
+            <span><strong>${{ "%.0f"|format(blueprint.budget_split.total_five_year_baby_cost) }}</strong></span>
+        </div>
+    </div>
+
+    {% for section in blueprint.report_sections %}
+    <h2>{{ section.section }}</h2>
+    <ul>
+        {% for bullet in section.bullets %}
+        <li>{{ bullet|safe }}</li>
+        {% endfor %}
+    </ul>
+    {% endfor %}
+
+    <div class="disclaimer">
+        <strong>⚠️ Important Disclaimer:</strong><br>
+        This plan is an estimate for planning purposes only and not guaranteed. Actual costs may vary based on your location, lifestyle choices, and unforeseen circumstances. This is <strong>not</strong> financial advice. Please consult with a qualified financial advisor for personalized guidance. NestWorth provides this tool to help you understand potential costs and prepare accordingly.
+    </div>
+
+    <div class="footer">
+        <p>Generated by NestWorth • Calculator Version {{ blueprint.calculator_version }} • Assumptions Version {{ blueprint.assumptions_version }}</p>
+        <p>Report generated for ZIP code {{ blueprint.profile.zip }} • Due date: {{ blueprint.profile.due_date }}</p>
+    </div>
+</body>
+</html>
