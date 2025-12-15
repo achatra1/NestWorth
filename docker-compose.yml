@@ -1,6 +1,7 @@
 version: '3.8'
 
 services:
+  # PostgreSQL Database
   postgres:
     image: postgres:15-alpine
     container_name: nestworth-postgres
@@ -17,6 +18,32 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+    networks:
+      - nestworth-network
+
+  # NestWorth API Application
+  nestworth-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: nestworth-api
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=postgresql+psycopg2://nestworth:nestworth123@postgres:5432/nestworth
+      - ENVIRONMENT=production
+    volumes:
+      - ./pdfs:/app/pdfs
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - nestworth-network
+    restart: unless-stopped
 
 volumes:
   postgres_data:
+
+networks:
+  nestworth-network:
+    driver: bridge
